@@ -14,7 +14,7 @@ mongoose.connect(config.mongoURI, {
 app.use(express.json());
 
 // Routes
-app.use('/api', teamsRoutes);
+app.use('/api/teams', teamsRoutes);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
