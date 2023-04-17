@@ -1,4 +1,4 @@
 module.exports = {
-    mongoURI: 'mongodb://localhost:27017/QRHunt/WebAPPQR',
+    mongoURI: 'mongodb://localhost:27017/QRHunt',
   };
   
