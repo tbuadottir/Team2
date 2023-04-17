@@ -38,7 +38,7 @@ const RandomPage = () => {
       const timeStamp = new Date();
 
       try {
-        await axios.post('/WebAPPQR', {
+        await axios.post('/api/teams', {
           teamName: groupName,
           timeStamp,
           randomPage,
