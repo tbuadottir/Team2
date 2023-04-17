@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import axios from 'axios';
 
 const RandomPage = () => {
   const [groupName, setGroupName] = useState('');
@@ -7,7 +8,7 @@ const RandomPage = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [submittedGroupNames, setSubmittedGroupNames] = useState(new Set());
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate the group name (only letters allowed)
@@ -33,12 +34,24 @@ const RandomPage = () => {
       setSubmittedGroupNames(new Set([...submittedGroupNames, groupName]));
 
       // Handle the form submission here
-      console.log(`Group name: ${groupName}`);
+      const randomPage = 'CLUE 1'; // Update this based on the current clue
+      const timeStamp = new Date();
 
-      // Empty the text box, clear the error message, and set the success message
-      setGroupName('');
-      setErrorMessage('');
-      setSuccessMessage('Your group name has been submitted successfully.');
+      try {
+        await axios.post('/api/teams', {
+          teamName: groupName,
+          timeStamp,
+          randomPage,
+        });
+
+        // Empty the text box, clear the error message, and set the success message
+        setGroupName('');
+        setErrorMessage('');
+        setSuccessMessage('Your group name has been submitted successfully.');
+      } catch (error) {
+        setErrorMessage('An error occurred while submitting your group name. Please try again.');
+        setSuccessMessage('');
+      }
     }
   };
 
